@@ -9,15 +9,22 @@ describe('map', () => {
     WaitForMapToBeLoaded()
   })
 
-  // FIXME skipped right now, something about that visual testing setup isn't right
-  it.skip('where it checks the controls, like zooming and toggle overlays',() => {
+  it('where the landing page still looks the same',() => {
     // see https://github.com/mjhea0/cypress-visual-regression
-    // you need tu run a suite creating the base snapshots
+    // you need to run a suite creating the base snapshots like
+    //     npx cypress run --env type=base --config screenshotsFolder=cypress/snapshots/base,testFiles=\"**/map.spec.js\"
     // then you can run a suite which compares to the base images
-    cy.compareSnapshot('inital-map-page');
+    //     npx cypress run --env type=actual --config testFiles=\"**/map.spec.js\"
+    cy.compareSnapshot('initial-map-page');
   })
 
-  it('where text changes based on language',() => {
+  it.skip('where controls change what is visible',() => {
+  })
+
+  it.skip('where mouse position translates to lat/long',() => {
+  })
+
+  it.skip('where text changes based on language',() => {
     EnsureThatEnglishIsSelected()
     // TODO: grab all texts, check if changing language changes the texts
   })
