@@ -2,6 +2,8 @@
 import LogInSuccessfully from "../../steps/LogInSuccessfully";
 import EnsureThatEnglishIsSelected from "../../steps/EnsureThatEnglishIsSelected";
 import WaitForMapToBeLoaded from "../../steps/WaitForMapToBeLoaded";
+import TakeBaseSnapshot from "../../steps/TakeBaseSnapshot";
+import EnsureImageChangedWithinBounds from "../../steps/EnsureImageChangedWithinBounds";
 
 describe('map', () => {
   beforeEach(() => {
@@ -9,16 +11,19 @@ describe('map', () => {
     WaitForMapToBeLoaded()
   })
 
-  it('where the landing page still looks the same',() => {
+  it.skip('where the landing page still looks the same',() => {
     // see https://github.com/mjhea0/cypress-visual-regression
     // you need to run a suite creating the base snapshots like
     //     npx cypress run --env type=base --config screenshotsFolder=cypress/snapshots/base,testFiles=\"**/map.spec.js\"
     // then you can run a suite which compares to the base images
     //     npx cypress run --env type=actual --config testFiles=\"**/map.spec.js\"
-    cy.compareSnapshot('initial-map-page');
+    cy.get("canvas").compareSnapshot('initial-map-page');
   })
 
-  it.skip('where controls change what is visible',() => {
+  it('where controls change what is visible',() => {
+    const base = TakeBaseSnapshot()
+    cy.get(".caris-bath-toggle").click()
+    EnsureImageChangedWithinBounds(base, 0.6, 0.8)
   })
 
   it.skip('where mouse position translates to lat/long',() => {
@@ -36,6 +41,7 @@ describe('map', () => {
   })
 
   it.skip('where it tries different actions on the map, see questionmark button',() => {
+    //cy.get("canvas").
   })
 
 
