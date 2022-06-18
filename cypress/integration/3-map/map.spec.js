@@ -2,8 +2,6 @@
 import LogInSuccessfully from "../../steps/LogInSuccessfully";
 import EnsureThatEnglishIsSelected from "../../steps/EnsureThatEnglishIsSelected";
 import WaitForMapToBeLoaded from "../../steps/WaitForMapToBeLoaded";
-import TakeBaseSnapshot from "../../steps/TakeBaseSnapshot";
-import EnsureImageChangedWithinBounds from "../../steps/EnsureImageChangedWithinBounds";
 
 describe('map', () => {
   beforeEach(() => {
@@ -11,7 +9,7 @@ describe('map', () => {
     WaitForMapToBeLoaded()
   })
 
-  it.skip('where the landing page still looks the same',() => {
+  it('where the landing page still looks the same',() => {
     // see https://github.com/mjhea0/cypress-visual-regression
     // you need to run a suite creating the base snapshots like
     //     npx cypress run --env type=base --config screenshotsFolder=cypress/snapshots/base,testFiles=\"**/map.spec.js\"
@@ -20,16 +18,14 @@ describe('map', () => {
     cy.get("canvas").compareSnapshot('initial-map-page');
   })
 
-  it('where controls change what is visible',() => {
-    const base = TakeBaseSnapshot()
-    cy.get(".caris-bath-toggle").click()
-    EnsureImageChangedWithinBounds(base, 0.6, 0.8)
+  it.skip('where controls change what is visible',() => {
+
   })
 
   it.skip('where mouse position translates to lat/long',() => {
   })
 
-  it.skip('where text changes based on language',() => {
+  it('where text changes based on language',() => {
     EnsureThatEnglishIsSelected()
     // TODO: grab all texts, check if changing language changes the texts
   })
